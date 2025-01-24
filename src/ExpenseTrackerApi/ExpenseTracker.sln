@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.WebApi", "ExpenseTracker.WebApi\ExpenseTracker.WebApi.csproj", "{5CC7571D-2720-4483-B2E5-C6B6738420C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Models", "ExpenseTracker.Models\ExpenseTracker.Models.csproj", "{35B0CB09-7644-4CA6-89EF-953B1A641A6E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5CC7571D-2720-4483-B2E5-C6B6738420C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CC7571D-2720-4483-B2E5-C6B6738420C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CC7571D-2720-4483-B2E5-C6B6738420C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CC7571D-2720-4483-B2E5-C6B6738420C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35B0CB09-7644-4CA6-89EF-953B1A641A6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35B0CB09-7644-4CA6-89EF-953B1A641A6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35B0CB09-7644-4CA6-89EF-953B1A641A6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35B0CB09-7644-4CA6-89EF-953B1A641A6E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
