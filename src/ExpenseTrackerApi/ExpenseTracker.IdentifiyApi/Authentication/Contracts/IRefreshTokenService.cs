@@ -1,4 +1,4 @@
-namespace ExpenseTrackerApi.Authentication.Contracts;
+namespace ExpenseTracker.IdentifiyApi.Authentication.Contracts;
 
 public interface IRefreshTokenService
 {

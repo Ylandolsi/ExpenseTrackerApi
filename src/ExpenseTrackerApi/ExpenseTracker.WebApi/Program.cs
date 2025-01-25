@@ -2,10 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ExpenseTrackerApi.Configuration;
-using ExpenseTrackerApi.DbContext;
 using ExpenseTrackerApi.ExceptionHandler;
+using ExpenseTrackerApi.Swagger;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using SharedDb.DbContext;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,7 +34,11 @@ builder.Services.AddControllers()
 
 builder.ConfigureRedis();
 
-builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions> ,ConfigureSwaggerOptions>();
+builder.Services.AddSwaggerGen();
+
 builder.Services.ConfigureCors();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
@@ -61,10 +69,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// builder.Services.AddAuthorization(); 
+builder.Services.AddAuthorization(); 
 
 
-builder.Services.ConfigureSwagger();
 
 
 
@@ -73,8 +80,6 @@ builder.Services.AddExceptionHandler<NotFoundExceptionHandler>();
 builder.Services.AddExceptionHandler<DbUpdateExceptionHandler>();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
-builder.Services.ConfigureAuthService();
-builder.Services.ConfigureRefreshTokenService();
 builder.Services.ConfigureUserService();
 // Enable authorization
 builder.Services.AddAuthorization();

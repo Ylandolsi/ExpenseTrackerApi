@@ -1,6 +1,6 @@
 using Models.Entities;
 
-namespace ExpenseTrackerApi.DbContext;
+namespace SharedDb.DbContext;
 
 using Microsoft.EntityFrameworkCore;
 

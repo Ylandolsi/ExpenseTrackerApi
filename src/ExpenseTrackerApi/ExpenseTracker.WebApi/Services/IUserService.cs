@@ -1,7 +1,7 @@
-using ExpenseTrackerApi.Dto.Expense;
-using Models.Entities;
+using Models.Entities.Dto.Expense;
+using Models.Entities.Dto.User;
 
-namespace ExpenseTrackerApi.Authentication.Contracts;
+namespace ExpenseTrackerApi.Services;
 
 public interface IUserService
 {

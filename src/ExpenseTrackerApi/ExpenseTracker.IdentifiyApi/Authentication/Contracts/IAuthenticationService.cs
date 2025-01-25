@@ -1,6 +1,5 @@
-using ExpenseTrackerApi.Dto.Expense;
-
-namespace ExpenseTrackerApi.Authentication.Contracts;
+using Models.Entities.Dto.User;
+namespace ExpenseTracker.IdentifiyApi.Authentication.Contracts;
 
 public interface IAuthenticationService
 {

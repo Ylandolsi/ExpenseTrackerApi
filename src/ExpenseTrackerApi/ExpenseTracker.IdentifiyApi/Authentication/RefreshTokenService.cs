@@ -1,9 +1,9 @@
-using ExpenseTrackerApi.Authentication.Contracts;
-using ExpenseTrackerApi.DbContext;
+using ExpenseTracker.IdentifiyApi.Authentication.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Models.Entities;
+using SharedDb.DbContext;
 
-namespace ExpenseTrackerApi.Authentication;
+namespace ExpenseTracker.IdentifiyApi.Authentication;
 
 public class RefreshTokenService : IRefreshTokenService
 {

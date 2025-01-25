@@ -1,9 +1,10 @@
 using System.Security.Claims;
-using ExpenseTrackerApi.Authentication.Contracts;
-using ExpenseTrackerApi.Dto.Expense;
+using ExpenseTrackerApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Models.Entities;
+using Models.Entities.Dto.Expense;
+using Models.Entities.Dto.User;
+
 
 namespace ExpenseTrackerApi.Controllers;
 
@@ -11,14 +12,12 @@ namespace ExpenseTrackerApi.Controllers;
 [Route("api/[controller]")]
 public class UserController : ControllerBase
 {
-    private readonly IAuthenticationService _authenticationService;
     private readonly IUserService _userService;
     private readonly ILogger<UserController> _logger;
 
-    public UserController(IAuthenticationService authenticationService, IUserService userService,
+    public UserController(IUserService userService,
         ILogger<UserController> logger)
     {
-        _authenticationService = authenticationService;
         _userService = userService;
         _logger = logger;
     }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace ExpenseTrackerApi.Migrations
+namespace SharedDb.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration
@@ -69,7 +69,7 @@ namespace ExpenseTrackerApi.Migrations
                     expenseCategory = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     expensePrice = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     expenseDate = table.Column<DateOnly>(type: "date", nullable: false),
-                    userProfilesId = table.Column<int>(type: "int", nullable: false)
+                    userProfilesId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -78,8 +78,7 @@ namespace ExpenseTrackerApi.Migrations
                         name: "FK_Expenses_UserProfiles_userProfilesId",
                         column: x => x.userProfilesId,
                         principalTable: "UserProfiles",
-                        principalColumn: "userId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "userId");
                 });
 
             migrationBuilder.CreateIndex(

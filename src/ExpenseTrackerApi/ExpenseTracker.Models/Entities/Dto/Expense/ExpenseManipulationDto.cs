@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace ExpenseTrackerApi.Dto.Expense;
+namespace Models.Entities.Dto.Expense;
 
 public record ExpenseManipulationDto
 {

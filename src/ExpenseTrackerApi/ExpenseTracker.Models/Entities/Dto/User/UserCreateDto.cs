@@ -1,4 +1,5 @@
-namespace ExpenseTrackerApi.Dto.Expense;
+namespace Models.Entities.Dto.User;
+
 
 public record UserCreateDto
 {

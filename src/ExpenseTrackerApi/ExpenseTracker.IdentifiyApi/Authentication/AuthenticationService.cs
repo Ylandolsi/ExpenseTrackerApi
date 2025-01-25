@@ -1,15 +1,16 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using ExpenseTrackerApi.Authentication.Contracts;
-using ExpenseTrackerApi.DbContext;
-using ExpenseTrackerApi.Dto.Expense;
+using ExpenseTracker.IdentifiyApi.Authentication.Contracts;
+using ExpenseTrackerApi;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Models.Entities;
+using Models.Entities.Dto.User;
 using Models.Exceptions;
+using SharedDb.DbContext;
 
-namespace ExpenseTrackerApi.Authentication;
+namespace ExpenseTracker.IdentifiyApi.Authentication;
 
 public class AuthenticationService : IAuthenticationService
 {
@@ -50,6 +51,7 @@ public class AuthenticationService : IAuthenticationService
             // Handle the case where no matching user is found
             throw new Exception("Invalid email/phone number.");
         }
+
 
 // Step 2: Verify the password hash in memory
         if (!LoginMethods.VerifyPasswordHash(loginRequest.Password, authUser.hashedPassword))

@@ -1,6 +1,7 @@
 using AutoMapper;
-using ExpenseTrackerApi.Dto.Expense;
 using Models.Entities;
+using Models.Entities.Dto.Expense;
+using Models.Entities.Dto.User;
 
 namespace ExpenseTrackerApi ; 
 

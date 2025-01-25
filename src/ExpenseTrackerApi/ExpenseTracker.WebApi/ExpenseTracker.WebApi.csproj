@@ -23,7 +23,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\ExpenseTracker.IdentifiyApi\ExpenseTracker.IdentifiyApi.csproj" />
       <ProjectReference Include="..\ExpenseTracker.Models\ExpenseTracker.Models.csproj" />
+      <ProjectReference Include="..\SharedDb\SharedDb.csproj" />
     </ItemGroup>
 
 </Project>

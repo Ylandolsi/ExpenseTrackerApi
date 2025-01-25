@@ -1,11 +1,11 @@
 using System.Text.Json;
 using AutoMapper;
-using ExpenseTrackerApi.Authentication.Contracts;
-using ExpenseTrackerApi.DbContext;
-using ExpenseTrackerApi.Dto.Expense;
 using Microsoft.EntityFrameworkCore;
 using Models.Entities;
+using Models.Entities.Dto.Expense;
+using Models.Entities.Dto.User;
 using Models.Exceptions;
+using SharedDb.DbContext;
 using StackExchange.Redis;
 
 namespace ExpenseTrackerApi.Services;

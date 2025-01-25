@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.WebApi", "Ex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Models", "ExpenseTracker.Models\ExpenseTracker.Models.csproj", "{35B0CB09-7644-4CA6-89EF-953B1A641A6E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.IdentifiyApi", "ExpenseTracker.IdentifiyApi\ExpenseTracker.IdentifiyApi.csproj", "{739F122D-829C-4DD2-8622-8EC1D5877999}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedDb", "SharedDb\SharedDb.csproj", "{1C9C9F97-A433-416A-8862-FC3743C54E6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{35B0CB09-7644-4CA6-89EF-953B1A641A6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35B0CB09-7644-4CA6-89EF-953B1A641A6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35B0CB09-7644-4CA6-89EF-953B1A641A6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{739F122D-829C-4DD2-8622-8EC1D5877999}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{739F122D-829C-4DD2-8622-8EC1D5877999}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{739F122D-829C-4DD2-8622-8EC1D5877999}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{739F122D-829C-4DD2-8622-8EC1D5877999}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C9C9F97-A433-416A-8862-FC3743C54E6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C9C9F97-A433-416A-8862-FC3743C54E6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C9C9F97-A433-416A-8862-FC3743C54E6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C9C9F97-A433-416A-8862-FC3743C54E6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
