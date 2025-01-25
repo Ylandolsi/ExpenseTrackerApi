@@ -1,7 +1,9 @@
 using ExpenseTrackerApi.Authentication;
 using ExpenseTrackerApi.Authentication.Contracts;
 using ExpenseTrackerApi.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
+using StackExchange.Redis;
 
 namespace ExpenseTrackerApi.Configuration;
 
@@ -23,29 +25,28 @@ public static class ServiceConfiguartion
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "toDoList api ", Version = "v1" });
-            c.AddSecurityDefinition("basic", new OpenApiSecurityScheme
+
+            // Add JWT Authentication support to Swagger
+            var securityScheme = new OpenApiSecurityScheme
             {
-                Name = "Authorization", // name of header used to send the auth
-                Type = SecuritySchemeType.Http, // use http based auth 
-                Scheme = "basic",
-                In = ParameterLocation.Header, // location of auth token ( http header )
-                Description = "Basic Authorization header."
-            });
+                Name = "JWT Authentication",
+                Description = "Enter JWT Bearer token **_only_**",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.Http,
+                Scheme = "bearer", // Must be lowercase
+                BearerFormat = "JWT",
+                Reference = new OpenApiReference
+                {
+                    Id = JwtBearerDefaults.AuthenticationScheme,
+                    Type = ReferenceType.SecurityScheme
+                }
+            };
+
+            c.AddSecurityDefinition(securityScheme.Reference.Id, securityScheme);
+
             c.AddSecurityRequirement(new OpenApiSecurityRequirement
             {
-                // You'll see a lock icon  next to each endpoint.
-                // Clicking the lock icon will prompt you to enter your username and password.
-                {
-                    new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "basic"
-                        }
-                    },
-                    new string[] { }
-                }
+                { securityScheme, Array.Empty<string>() }
             });
         });
     }
@@ -63,5 +64,16 @@ public static class ServiceConfiguartion
     public static void ConfigureUserService(this IServiceCollection services)
     {
         services.AddScoped<IUserService, UserService>();
+    }
+
+    public static void ConfigureRedis(this WebApplicationBuilder builder)
+    {
+        // Install-Package Microsoft.Extensions.Caching.StackExchangeRedis
+
+        // Register the Redis connection multiplexer as a singleton service
+        // This allows the application to interact directly with Redis for advanced scenarios
+        builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
+            // Establish a connection to the Redis server using the configuration from appsettings.json
+            ConnectionMultiplexer.Connect(builder.Configuration["RedisCacheOptions:Configuration"]));
     }
 }

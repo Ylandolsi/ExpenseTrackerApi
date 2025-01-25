@@ -31,32 +31,36 @@ public class UserController : ControllerBase
             return UnprocessableEntity(ModelState);
         }
 
-        var user = await _authenticationService.AuthenticateUserAsync(loginDto);
-        if (user == null)
+        var userProps = await _authenticationService.AuthenticateUserAsync(loginDto);
+        if (userProps == null)
         {
             return Unauthorized("Invalid email or password");
         }
-
-        return Ok(System.Text.Json.JsonSerializer.Serialize(user));
+        _logger.LogInformation("User Authenticated");
+        return Ok(userProps);
     }
 
     [HttpPost("RefreshToken")]
-    public async Task<IActionResult> RefreshToken(string token)
+    public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenBody token)
     {
-        if (string.IsNullOrEmpty(token))
+        if (string.IsNullOrEmpty(token.refreshToken))
             return BadRequest("Token is required");
-        await _authenticationService.RefreshToken(token);
-        return Ok("Refresh Token Successful");
+        var userProps = await _authenticationService.RefreshToken(token.refreshToken);
+        _logger.LogInformation("Refresh Token Validated");
+        return Ok(userProps); 
     }
 
+
     [HttpPost("RevokeToken")]
-    public async Task<IActionResult> RevokeToken(string token)
+    public async Task<IActionResult> RevokeToken([FromBody] RefreshTokenBody token)
     {
-        if (string.IsNullOrEmpty(token))
+        if (string.IsNullOrEmpty(token.refreshToken))
             return BadRequest("Token is required");
-        await _authenticationService.RevokeToken(token);
+        await _authenticationService.RevokeToken(token.refreshToken);
+        _logger.LogInformation("Token Revoked");
         return Ok("Token Revoked");
     }
+
 
     [HttpPost("CreateAccount")]
     public async Task<IActionResult> CreateAccount([FromBody] UserCreateDto userRegistration)
@@ -147,14 +151,13 @@ public class UserController : ControllerBase
     [Authorize]
     [HttpGet("expense/{from}/{to}")]
     // http://localhost:5135/api/User/expense/2025-01-20/2025-01-25
-    
     public async Task<IActionResult> GetExpensesOfLast(string from, string to)
     {
-
-        if (!DateOnly.TryParse(from, out var startDate) || !DateOnly.TryParse(to, out var  endDate ))
+        if (!DateOnly.TryParse(from, out var startDate) || !DateOnly.TryParse(to, out var endDate))
         {
             return BadRequest("Invalid Value For Dates : Dates should be in the format yyyy-MM-dd");
         }
+
         if (startDate > endDate)
         {
             return BadRequest("Invalid Value For Dates : startDate should be less than endDate");

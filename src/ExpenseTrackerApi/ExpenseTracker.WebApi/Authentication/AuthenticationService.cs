@@ -80,7 +80,9 @@ public class AuthenticationService : IAuthenticationService
         }
 
         // Retrieve the user by username.
-        var user = _dbContext.AuthUsers.FirstOrDefault(u => u.userId == idUser);
+        var user = _dbContext.AuthUsers
+            .Include(u => u.UserProfile)
+            .FirstOrDefault(u => u.userId == idUser);
         if (user == null)
         {
             return null;

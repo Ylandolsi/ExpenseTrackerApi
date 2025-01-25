@@ -28,6 +28,7 @@ builder.Services.AddControllers()
 
     });
 
+builder.ConfigureRedis();
 
 builder.Services.AddOpenApi();
 builder.Services.ConfigureCors();
