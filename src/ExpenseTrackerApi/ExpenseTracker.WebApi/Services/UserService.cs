@@ -5,7 +5,7 @@ using Models.Entities;
 using Models.Entities.Dto.Expense;
 using Models.Entities.Dto.User;
 using Models.Exceptions;
-using SharedDb.DbContext;
+using ExpenseTracker.Shared.DbContext;
 using StackExchange.Redis;
 
 namespace ExpenseTrackerApi.Services;

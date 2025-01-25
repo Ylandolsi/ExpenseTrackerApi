@@ -8,7 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using Models.Entities;
 using Models.Entities.Dto.User;
 using Models.Exceptions;
-using SharedDb.DbContext;
+using ExpenseTracker.Shared.DbContext;
 
 namespace ExpenseTracker.IdentifiyApi.Authentication;
 

@@ -1,7 +1,7 @@
 using ExpenseTracker.IdentifiyApi.Authentication;
 using ExpenseTracker.IdentifiyApi.Authentication.Contracts;
 using Microsoft.EntityFrameworkCore;
-using SharedDb.DbContext;
+using ExpenseTracker.Shared.DbContext;
 
 var builder = WebApplication.CreateBuilder(args);
 

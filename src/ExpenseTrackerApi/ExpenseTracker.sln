@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Models", "Ex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.IdentifiyApi", "ExpenseTracker.IdentifiyApi\ExpenseTracker.IdentifiyApi.csproj", "{739F122D-829C-4DD2-8622-8EC1D5877999}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedDb", "SharedDb\SharedDb.csproj", "{1C9C9F97-A433-416A-8862-FC3743C54E6A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Shared", "ExpenseTracker.Shared\ExpenseTracker.Shared.csproj", "{1C9C9F97-A433-416A-8862-FC3743C54E6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

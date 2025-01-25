@@ -1,7 +1,7 @@
 using ExpenseTracker.IdentifiyApi.Authentication.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Models.Entities;
-using SharedDb.DbContext;
+using ExpenseTracker.Shared.DbContext;
 
 namespace ExpenseTracker.IdentifiyApi.Authentication;
 

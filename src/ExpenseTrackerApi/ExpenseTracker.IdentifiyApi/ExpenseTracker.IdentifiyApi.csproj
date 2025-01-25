@@ -22,7 +22,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\ExpenseTracker.Models\ExpenseTracker.Models.csproj"/>
-        <ProjectReference Include="..\SharedDb\SharedDb.csproj"/>
+        <ProjectReference Include="..\ExpenseTracker.Shared\ExpenseTracker.Shared.csproj" />
     </ItemGroup>
 
 </Project>
