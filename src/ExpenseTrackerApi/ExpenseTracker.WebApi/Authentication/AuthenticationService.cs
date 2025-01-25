@@ -91,7 +91,7 @@ public class AuthenticationService : IAuthenticationService
         // Issue a new access token and refresh token for the user.
         var accessToken = IssueAccessToken(user);
         var newRefreshToken = GenerateRefreshToken();
-        
+
         // delete the old refresh token
         await _tokenService.RevokeRefreshToken(request);
 

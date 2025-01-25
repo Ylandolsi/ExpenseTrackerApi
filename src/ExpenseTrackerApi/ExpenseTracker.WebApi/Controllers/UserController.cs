@@ -22,46 +22,7 @@ public class UserController : ControllerBase
         _userService = userService;
         _logger = logger;
     }
-
-    [HttpPost("Login")]
-    public async Task<IActionResult> Login([FromBody] UserLogin loginDto)
-    {
-        if (!ModelState.IsValid)
-        {
-            return UnprocessableEntity(ModelState);
-        }
-
-        var userProps = await _authenticationService.AuthenticateUserAsync(loginDto);
-        if (userProps == null)
-        {
-            return Unauthorized("Invalid email or password");
-        }
-        _logger.LogInformation("User Authenticated");
-        return Ok(userProps);
-    }
-
-    [HttpPost("RefreshToken")]
-    public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenBody token)
-    {
-        if (string.IsNullOrEmpty(token.refreshToken))
-            return BadRequest("Token is required");
-        var userProps = await _authenticationService.RefreshToken(token.refreshToken);
-        _logger.LogInformation("Refresh Token Validated");
-        return Ok(userProps); 
-    }
-
-
-    [HttpPost("RevokeToken")]
-    public async Task<IActionResult> RevokeToken([FromBody] RefreshTokenBody token)
-    {
-        if (string.IsNullOrEmpty(token.refreshToken))
-            return BadRequest("Token is required");
-        await _authenticationService.RevokeToken(token.refreshToken);
-        _logger.LogInformation("Token Revoked");
-        return Ok("Token Revoked");
-    }
-
-
+    
     [HttpPost("CreateAccount")]
     public async Task<IActionResult> CreateAccount([FromBody] UserCreateDto userRegistration)
     {
