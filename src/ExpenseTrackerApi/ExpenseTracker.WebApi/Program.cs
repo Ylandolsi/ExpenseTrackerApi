@@ -69,7 +69,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-builder.Services.AddAuthorization(); 
+builder.Services.AddAuthorization(); // enables role based authorization , claims based authorization .... 
 
 
 
@@ -81,8 +81,7 @@ builder.Services.AddExceptionHandler<DbUpdateExceptionHandler>();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 builder.Services.ConfigureUserService();
-// Enable authorization
-builder.Services.AddAuthorization();
+
 builder.Services.AddProblemDetails(); // to return problem details in case of error ( Excepion Handlers ) 
 
 
@@ -116,7 +115,7 @@ app.UseSwagger();
 
 app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Blog API ");
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "ExpenseTracker API ");
 });
 
 
