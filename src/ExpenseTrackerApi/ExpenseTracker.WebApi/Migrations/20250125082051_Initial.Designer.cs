@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpenseTrackerApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250124101815_CreateDataBase")]
-    partial class CreateDataBase
+    [Migration("20250125082051_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,6 +80,29 @@ namespace ExpenseTrackerApi.Migrations
                     b.ToTable("Expenses");
                 });
 
+            modelBuilder.Entity("Models.Entities.RefreshToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("userId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RefreshTokens");
+                });
+
             modelBuilder.Entity("Models.Entities.UserProfile", b =>
                 {
                     b.Property<int>("userId")
@@ -121,8 +144,7 @@ namespace ExpenseTrackerApi.Migrations
 
             modelBuilder.Entity("Models.Entities.UserProfile", b =>
                 {
-                    b.Navigation("AuthUser")
-                        .IsRequired();
+                    b.Navigation("AuthUser");
 
                     b.Navigation("UserExpenses");
                 });

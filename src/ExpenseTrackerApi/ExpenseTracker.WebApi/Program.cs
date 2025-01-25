@@ -1,8 +1,11 @@
+﻿using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ExpenseTrackerApi.Configuration;
 using ExpenseTrackerApi.DbContext;
 using ExpenseTrackerApi.ExceptionHandler;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +20,12 @@ builder.Services.AddControllers()
         // or we can just use [JsonIgnore] on the navigation property ORRR Dto for repsponse
         options.JsonSerializerOptions.ReferenceHandler =
             System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+        //--------------------
+
+        // to avoid the camel case ( default ) :
+        // keeps the property name as it is ( when converting the models to json) 
+        options.JsonSerializerOptions.PropertyNamingPolicy = null; 
+
     });
 
 
@@ -25,6 +34,33 @@ builder.Services.ConfigureCors();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+
+
+// Configure JWT authentication
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            // ensure issuer = valideIssuer
+            ValidateIssuer = true,
+            // ensure audience = valideAudience
+            ValidateAudience = true,
+            // ensure the token is not expired
+            ValidateLifetime = true,
+            //  Ensures that the token’s signing key is validated 
+            // by using IssuerSigningKey below 
+            ValidateIssuerSigningKey = true, 
+
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+            // if we use custom claim name for anyclaim we should specify it here
+            // ex : RoleClaimType = "role"
+        };
+    });
+
+
 builder.Services.ConfigureSwagger();
 
 
@@ -34,6 +70,9 @@ builder.Services.AddExceptionHandler<NotFoundExceptionHandler>();
 builder.Services.AddExceptionHandler<DbUpdateExceptionHandler>();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
+builder.Services.ConfigureAuthService();
+builder.Services.ConfigureRefreshTokenService();
+builder.Services.ConfigureUserService();
 // Enable authorization
 builder.Services.AddAuthorization();
 builder.Services.AddProblemDetails(); // to return problem details in case of error ( Excepion Handlers ) 

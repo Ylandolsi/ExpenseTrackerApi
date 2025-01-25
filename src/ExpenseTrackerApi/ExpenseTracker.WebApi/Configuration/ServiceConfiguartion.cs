@@ -1,6 +1,9 @@
+using ExpenseTrackerApi.Authentication;
+using ExpenseTrackerApi.Authentication.Contracts;
+using ExpenseTrackerApi.Services;
 using Microsoft.OpenApi.Models;
 
-namespace ExpenseTrackerApi.Configuration ;
+namespace ExpenseTrackerApi.Configuration;
 
 public static class ServiceConfiguartion
 {
@@ -47,8 +50,18 @@ public static class ServiceConfiguartion
         });
     }
 
+    public static void ConfigureRefreshTokenService(this IServiceCollection services)
+    {
+        services.AddScoped<IRefreshTokenService, RefreshTokenService>();
+    }
 
+    public static void ConfigureAuthService(this IServiceCollection services)
+    {
+        services.AddScoped<IAuthenticationService, AuthenticationService>();
+    }
 
-
-
+    public static void ConfigureUserService(this IServiceCollection services)
+    {
+        services.AddScoped<IUserService, UserService>();
+    }
 }

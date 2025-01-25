@@ -44,4 +44,5 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<Expense> Expenses { get; set; }
     public DbSet<UserProfile> UserProfiles { get; set; }
     public DbSet<AuthUser> AuthUsers { get; set; }
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
 }

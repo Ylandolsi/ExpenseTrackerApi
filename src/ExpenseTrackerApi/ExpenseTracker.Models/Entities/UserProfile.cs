@@ -11,6 +11,6 @@ public class UserProfile
     
     // Intialize the collection to avoid null reference exception
     public ICollection<Expense> UserExpenses { get; set; } = new List<Expense>();
-    public AuthUser AuthUser { get; set; }
+    public AuthUser? AuthUser { get; set; }
     
 }

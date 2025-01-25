@@ -16,6 +16,6 @@ public class Expense
     public DateOnly expenseDate { get; set; }
     
     // foreign key 
-    public int userProfilesId { get; set; }
+    public int? userProfilesId { get; set; }
     public UserProfile UserProfile { get; set; }
 }
